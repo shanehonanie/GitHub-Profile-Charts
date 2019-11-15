@@ -60,12 +60,18 @@ const GithubState = props => {
 	};
 
 	// Get Repos
-	const getUserRepos = async username => {
+	const getUserLastUpdatedRepos = async username => {
 		setLoading();
 
+		// const res = await axios.get(
+		// 	`https://api.github.com/users/${username}/repos?per_page=20&sort=updated:asc&client_id=${githubClientId}&client_secret=${githubClientSecret}`
+		// );
+
 		const res = await axios.get(
-			`https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${githubClientId}&client_secret=${githubClientSecret}`
+			`https://api.github.com/users/${username}/repos?per_page=20&sort=updated&client_id=${githubClientId}&client_secret=${githubClientSecret}`
 		);
+
+		console.log(res);
 
 		dispatch({
 			type: GET_REPOS,
@@ -89,7 +95,7 @@ const GithubState = props => {
 				searchUsers,
 				clearUsers,
 				getUser,
-				getUserRepos
+				getUserLastUpdatedRepos
 			}}
 		>
 			{props.children}
