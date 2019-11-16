@@ -21,21 +21,27 @@ const Search = () => {
 	const onChange = e => setText(e.target.value);
 
 	return (
-		<div>
+		<div className='container'>
 			<form onSubmit={onSubmit} className='form'>
-				<input
-					type='text'
-					name='text'
-					placeholder='Search Users...'
-					value={text}
-					onChange={onChange}
-				/>
-				<input
-					type='submit'
-					value='Search'
-					className='btn btn-dark btn-block'
-				/>
+				<div className='row mt-4'>
+					<input
+						style={{ minWidth: '100%' }}
+						type='text'
+						name='text'
+						placeholder='Search Users...'
+						value={text}
+						onChange={onChange}
+					/>
+				</div>
+				<div className='row mt-3'>
+					<input
+						type='submit'
+						value='Search'
+						className='btn btn-dark btn-block'
+					/>
+				</div>
 			</form>
+
 			{githubContext.users.length > 0 && (
 				<button
 					className='btn btn-light btn-block'

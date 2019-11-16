@@ -19,7 +19,7 @@ const App = () => {
 				<BrowserRouter>
 					<div className='App'>
 						<Navbar />
-						<div className='container'>
+						<div className='fluid-container'>
 							<Alert />
 							<Switch>
 								<Route exact path='/' component={Home} />

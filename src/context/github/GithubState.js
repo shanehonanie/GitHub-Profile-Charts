@@ -7,7 +7,8 @@ import {
 	SET_LOADING,
 	CLEAR_USERS,
 	GET_USER,
-	GET_REPOS
+	GET_REPOS,
+	GET_REPO_LANGUAGES
 } from '../types';
 
 let githubClientId;
@@ -26,6 +27,7 @@ const GithubState = props => {
 		users: [],
 		user: {},
 		repos: [],
+		uniqueLangs: [],
 		loading: false
 	};
 
@@ -71,11 +73,36 @@ const GithubState = props => {
 			`https://api.github.com/users/${username}/repos?per_page=20&sort=updated&client_id=${githubClientId}&client_secret=${githubClientSecret}`
 		);
 
-		console.log(res);
-
 		dispatch({
 			type: GET_REPOS,
 			payload: res.data
+		});
+	};
+
+	// Get Repo Launguages
+	const getUserRepoLanguages = async (usernameIn, reposIn) => {
+		//setLoading();
+
+		let repoLangCalc = [];
+
+		for (let i = 0; i < reposIn.length; i++) {
+			const res = await axios.get(
+				`https://api.github.com/repos/${usernameIn}/${reposIn[i].name}/languages`
+			);
+
+			for (const x in res.data) {
+				repoLangCalc.push(x);
+			}
+		}
+
+		const uniques = repoLangCalc.reduce((acc, val) => {
+			acc[val] = acc[val] === undefined ? 1 : (acc[val] += 1);
+			return acc;
+		}, {});
+
+		dispatch({
+			type: GET_REPO_LANGUAGES,
+			payload: uniques
 		});
 	};
 
@@ -92,10 +119,12 @@ const GithubState = props => {
 				user: state.user,
 				repos: state.repos,
 				loading: state.loading,
+				uniqueLangs: state.uniqueLangs,
 				searchUsers,
 				clearUsers,
 				getUser,
-				getUserLastUpdatedRepos
+				getUserLastUpdatedRepos,
+				getUserRepoLanguages
 			}}
 		>
 			{props.children}

@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const UserItem = ({ user: { login, avatar_url, html_url } }) => {
+const UserItem = ({ user: { login, avatar_url } }) => {
 	return (
-		<div className='card text-center'>
+		<div className='card text-center col-md-3 m-3'>
 			<img
 				src={avatar_url}
 				alt=''
-				className='round-img'
+				className='rounded-circle center-block mx-auto'
 				style={{ width: '60px' }}
 			/>
 			<h3>{login}</h3>
