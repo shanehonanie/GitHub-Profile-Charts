@@ -122,21 +122,24 @@ const User = ({ match }) => {
 								<p className='row m-0'>
 									{login && (
 										<Fragment>
-											<strong>Username: </strong> {login}
+											<strong>Username: </strong>{' '}
+											<span className='ml-1'>{login}</span>
 										</Fragment>
 									)}
 								</p>
 								<p className='row m-0'>
 									{company && (
 										<Fragment>
-											<strong>Company: </strong> {company}
+											<strong>Company: </strong>
+											<span className='ml-1'>{company}</span>
 										</Fragment>
 									)}
 								</p>
 								<p className='row m-0'>
 									{blog && (
 										<Fragment>
-											<strong>Website: </strong> {blog}
+											<strong>Website: </strong>
+											<span className='ml-1'>{blog}</span>
 										</Fragment>
 									)}
 								</p>
@@ -147,16 +150,16 @@ const User = ({ match }) => {
 
 				<div className='fluid-container card my-2'>
 					<div className='row justify-content-md-center align-middle py-2'>
-						<div className='badge badge-primary mx-1'>
+						<div className='badge badge-primary mx-1 col-sm-3'>
 							Followers: {followers}
 						</div>
-						<div className='badge badge-success mx-1'>
+						<div className='badge badge-success mx-1 col-sm-3'>
 							Following: {following}
 						</div>
-						<div className='badge badge-secondary mx-1'>
+						<div className='badge badge-secondary mx-1 col-sm-3'>
 							Public Repos: {public_repos}
 						</div>
-						<div className='badge badge-dark mx-1'>
+						<div className='badge badge-dark mx-1 col-sm-3'>
 							Public Gists: {public_gists}
 						</div>
 					</div>
