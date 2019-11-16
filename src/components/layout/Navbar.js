@@ -6,9 +6,9 @@ const Navbar = ({ icon, title }) => {
 	return (
 		<nav className='bg-primary text-white'>
 			<div className='row'>
-				<h1 className='mr-auto pl-5'>
+				<h2 className='mr-auto pl-5'>
 					<i className={icon}></i> {title}
-				</h1>
+				</h2>
 				{/* <h3 className='justify-self-end bg-white'>
 					<Link to='/'>Home</Link>
 				</h3>
