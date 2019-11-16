@@ -23,7 +23,7 @@ const Search = () => {
 	return (
 		<div className='container'>
 			<form onSubmit={onSubmit} className='form'>
-				<div className='row mt-4'>
+				<div className='row mt-4 mx-2'>
 					<input
 						style={{ minWidth: '100%' }}
 						type='text'
@@ -33,7 +33,7 @@ const Search = () => {
 						onChange={onChange}
 					/>
 				</div>
-				<div className='row mt-3'>
+				<div className='row mt-3 mx-2'>
 					<input
 						type='submit'
 						value='Search'
@@ -41,7 +41,7 @@ const Search = () => {
 					/>
 				</div>
 			</form>
-			<div className='row mt-3'>
+			<div className='row mt-3 mx-2'>
 				{githubContext.users.length > 0 && (
 					<button
 						className='btn btn-light btn-block'
