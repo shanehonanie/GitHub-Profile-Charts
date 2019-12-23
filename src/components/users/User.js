@@ -1,11 +1,14 @@
-import React, { Fragment, useEffect, useContext } from 'react';
-import Spinner from '../layout/Spinner';
+import React, { Fragment, useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Repos from '../repos/Repos';
-import GithubContext from '../../context/github/GithubContext';
 import Chart from 'react-google-charts';
 
+import Spinner from '../layout/Spinner';
+import Repos from '../repos/Repos';
+import GithubContext from '../../context/github/GithubContext';
+import SelectListGroup from '../UI/SelectListGroup';
+
 const User = ({ match }) => {
+	const [reposSortedBy, setReposSortedBy] = useState('updated_at');
 	const githubContext = useContext(GithubContext);
 
 	const {
@@ -26,6 +29,7 @@ const User = ({ match }) => {
 
 	useEffect(() => {
 		getUserRepoLanguages(user.login, repos);
+		console.log('repos', repos);
 		// eslint-disable-next-line
 	}, [repos]);
 
@@ -36,6 +40,38 @@ const User = ({ match }) => {
 		for (const key in arr) result.push([key, arr[key]]);
 
 		return result;
+	};
+
+	const inputChangedHandler = e => {
+		setReposSortedBy(e.target.value);
+
+		// sort the repos by asc or desc depending on criteria
+		switch (e.target.value) {
+			case 'size':
+			case 'stargazers_count':
+			case 'forks_count':
+				// desc
+				repos.sort(repoSort('-' + e.target.value));
+				break;
+			default:
+				// asc
+				repos.sort(repoSort(e.target.value));
+				break;
+		}
+	};
+
+	// Sort the repos object by property criteria
+	const repoSort = property => {
+		var sortOrder = 1;
+		if (property[0] === '-') {
+			sortOrder = -1;
+			property = property.substr(1);
+		}
+		return function(a, b) {
+			var result =
+				a[property] < b[property] ? -1 : a[property] > b[property] ? 1 : 0;
+			return result * sortOrder;
+		};
 	};
 
 	const {
@@ -55,6 +91,15 @@ const User = ({ match }) => {
 	} = user;
 
 	let langChart = null;
+
+	const selectListOptions = [
+		{ label: 'Name', value: 'name' },
+		{ label: 'Size', value: 'size' },
+		{ label: 'Stars', value: 'stargazers_count' },
+		{ label: 'Forks', value: 'forks_count' },
+		{ label: 'Created', value: 'created_at' },
+		{ label: 'Updated', value: 'updated_at' }
+	];
 
 	if (loading) return <Spinner />;
 
@@ -170,8 +215,22 @@ const User = ({ match }) => {
 					<div className='row justify-content-center'>{langChart}</div>
 				</div>
 			</div>
-			;
-			<div className='fluid-container col-lg-10 offset-lg-1'>
+
+			<div className='container col-lg-10 offset-lg-1 pt-2'>
+				<div className='row align-items-center'>
+					<div className='col-7 offset-lg-1'>
+						<h3>Latest Repos</h3>
+					</div>
+					<h5 className='col-lg-1'>Sort By</h5>
+					<div className='col-lg-2 justify-content-start'>
+						<SelectListGroup
+							name='repoSortedBySelect'
+							value={reposSortedBy}
+							onChange={inputChangedHandler}
+							options={selectListOptions}
+						/>
+					</div>
+				</div>
 				<div className='row justify-content-center'>
 					<Repos repos={repos} />
 				</div>
