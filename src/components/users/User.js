@@ -50,6 +50,7 @@ const User = ({ match }) => {
 			case 'size':
 			case 'stargazers_count':
 			case 'forks_count':
+			case 'updated_at':
 				// desc
 				repos.sort(repoSort('-' + e.target.value));
 				break;
@@ -121,21 +122,17 @@ const User = ({ match }) => {
 
 	return (
 		<Fragment>
-			<div className='fluid-container col-lg-8 offset-lg-2'>
-				<div className='row m-2'>
-					<Link to='/' className='btn btn-dark'>
-						Back To Search
-					</Link>
-				</div>
-				<div className='fluid-container card'>
-					<div className='row mt-4'>
-						<div className='col-lg-6 text-center my-1'>
-							<img
-								src={avatar_url}
-								className='rounded-circle center-block'
-								alt=''
-								style={{ width: '150px' }}
-							/>
+			<div className='container'>
+				<Link to='/' className='btn-success btn-back-search'>
+					Back To Search
+				</Link>
+
+				{/* Top Card */}
+				<div className='card'>
+					<div className='user-info'>
+						{/* Left Section */}
+						<div className='user-info__left'>
+							<img src={avatar_url} alt='' />
 							<h1>{name}</h1>
 							<p className='my-1'>Location: {location}</p>
 							<p className='my-1'>
@@ -147,92 +144,92 @@ const User = ({ match }) => {
 								)}
 							</p>
 						</div>
-
-						<div className='col-lg-6 text-left'>
-							<div>
-								{bio && (
+						{/* Right Section */}
+						<div className='user-info__right'>
+							{bio && (
+								<Fragment>
+									<h2>Bio</h2>
+									<p>{bio}</p>
+								</Fragment>
+							)}
+							<a
+								href={html_url}
+								target='_blank'
+								rel='noopener noreferrer'
+								className='btn-dark user-info__right__btn'
+							>
+								Visit Github Profile
+							</a>
+							<p>
+								{login && (
 									<Fragment>
-										<h3>Bio</h3>
-										<p>{bio}</p>
+										<strong>Username: </strong> <span>{login}</span>
 									</Fragment>
 								)}
-								<a
-									href={html_url}
-									target='_blank'
-									rel='noopener noreferrer'
-									className='btn btn-dark my-1'
-								>
-									Visit Github Profile
-								</a>
-								<p className='row m-0'>
-									{login && (
-										<Fragment>
-											<strong>Username: </strong>{' '}
-											<span className='ml-1'>{login}</span>
-										</Fragment>
-									)}
-								</p>
-								<p className='row m-0'>
-									{company && (
-										<Fragment>
-											<strong>Company: </strong>
-											<span className='ml-1'>{company}</span>
-										</Fragment>
-									)}
-								</p>
-								<p className='row m-0'>
-									{blog && (
-										<Fragment>
-											<strong>Website: </strong>
-											<span className='ml-1'>{blog}</span>
-										</Fragment>
-									)}
-								</p>
-							</div>
+							</p>
+							<p>
+								{company && (
+									<Fragment>
+										<strong>Company: </strong>
+										<span>{company}</span>
+									</Fragment>
+								)}
+							</p>
+							<p>
+								{blog && (
+									<Fragment>
+										<strong>Website: </strong>
+										<span className='ml-1'>{blog}</span>
+									</Fragment>
+								)}
+							</p>
 						</div>
 					</div>
 				</div>
 
-				<div className='fluid-container card my-2'>
-					<div className='row justify-content-md-center align-middle py-2'>
-						<div className='badge badge-primary mx-1 col-sm-3'>
+				{/* Middle Card */}
+				<div className='card card-middle'>
+					<div className='public-info'>
+						<div className='badge public-info__followers'>
 							Followers: {followers}
 						</div>
-						<div className='badge badge-success mx-1 col-sm-3'>
+						<div className='badge public-info__following'>
 							Following: {following}
 						</div>
-						<div className='badge badge-secondary mx-1 col-sm-3'>
+						<div className='badge public-info__repos'>
 							Public Repos: {public_repos}
 						</div>
-						<div className='badge badge-dark mx-1 col-sm-3'>
+						<div className='badge public-info__gists'>
 							Public Gists: {public_gists}
 						</div>
 					</div>
 				</div>
-			</div>
-			<div className='fluid-container col-lg-8 offset-lg-2'>
-				<div className='card'>
-					<div className='row justify-content-center'>{langChart}</div>
-				</div>
-			</div>
 
-			<div className='container col-lg-10 offset-lg-1 pt-2'>
-				<div className='row align-items-center'>
-					<div className='col-7 offset-lg-1'>
-						<h3>Latest Repos</h3>
-					</div>
-					<h5 className='col-lg-1'>Sort By</h5>
-					<div className='col-lg-2 justify-content-start'>
-						<SelectListGroup
-							name='repoSortedBySelect'
-							value={reposSortedBy}
-							onChange={inputChangedHandler}
-							options={selectListOptions}
-						/>
+				{/* Bottom Card */}
+				<div className='card card-bottom'>{langChart}</div>
+
+				{/* Title and Select Group */}
+				<div className='repo-header'>
+					<h3>Latest Repos</h3>
+					<div className='repo-header__sort-group'>
+						<h5 className='repo-header__sort-group__label'>Sorted By</h5>
+						<div className=''>
+							<SelectListGroup
+								name='repoSortedBySelect'
+								value={reposSortedBy}
+								onChange={inputChangedHandler}
+								options={selectListOptions}
+								className='repo-header__sort-group__select'
+							/>
+						</div>
 					</div>
 				</div>
-				<div className='row justify-content-center'>
+
+				{/* User Repos */}
+				<div className='repo-results'>
+					{/* <div className='card-item'> */}
 					<Repos repos={repos} />
+					{/* </div> */}
 				</div>
 			</div>
 		</Fragment>

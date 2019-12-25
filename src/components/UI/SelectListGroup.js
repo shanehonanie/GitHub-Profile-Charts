@@ -8,12 +8,12 @@ const SelectListGroup = ({ name, value, onChange, options }) => {
 		</option>
 	));
 	return (
-		<div className='form-group'>
+		<div>
 			<select
-				className='form-control form-control-lg'
 				name={name}
 				value={value}
 				onChange={onChange}
+				className='repo-header__sort-group__select'
 			>
 				{selectOptions}
 			</select>

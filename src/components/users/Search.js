@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, Fragment } from 'react';
 import GithubContext from '../../context/github/GithubContext';
 import AlertContext from '../../context/alert/AlertContext';
 
@@ -11,7 +11,7 @@ const Search = () => {
 	const onSubmit = e => {
 		e.preventDefault();
 		if (text === '') {
-			alertContext.setAlert('Please enter something', 'light');
+			alertContext.setAlert('Please enter something', 'danger');
 		} else {
 			githubContext.searchUsers(text);
 			setText('');
@@ -21,37 +21,31 @@ const Search = () => {
 	const onChange = e => setText(e.target.value);
 
 	return (
-		<div className='container'>
-			<form onSubmit={onSubmit} className='form'>
-				<div className='row mt-4 mx-2'>
-					<input
-						style={{ minWidth: '100%' }}
-						type='text'
-						name='text'
-						placeholder='Search Users...'
-						value={text}
-						onChange={onChange}
-					/>
-				</div>
-				<div className='row mt-3 mx-2'>
-					<input
-						type='submit'
-						value='Search'
-						className='btn btn-dark btn-block'
-					/>
-				</div>
-			</form>
-			<div className='row mt-3 mx-2'>
+		<Fragment>
+			<form onSubmit={onSubmit} className='search'>
+				<input
+					className='search__input'
+					type='text'
+					name='text'
+					placeholder='Search Users...'
+					value={text}
+					onChange={onChange}
+				/>
+				<input
+					className='search__button-search btn-dark'
+					type='submit'
+					value='Search'
+				/>
 				{githubContext.users.length > 0 && (
 					<button
-						className='btn btn-light btn-block'
+						className='search__button-clear btn-light'
 						onClick={githubContext.clearUsers}
 					>
 						Clear
 					</button>
 				)}
-			</div>
-		</div>
+			</form>
+		</Fragment>
 	);
 };
 

@@ -4,19 +4,20 @@ import { Link } from 'react-router-dom';
 
 const Navbar = ({ icon, title }) => {
 	return (
-		<nav className='bg-primary text-white'>
-			<div className='row'>
-				<h2 className='mr-auto pl-5'>
-					<i className={icon}></i> {title}
-				</h2>
-				{/* <h3 className='justify-self-end bg-white'>
+		<header className='header'>
+			<h2 className='header__title'>
+				<i className={icon}></i> {title}
+			</h2>
+
+			<nav className='nav-links'>
+				<h2 className='nav-links__link'>
 					<Link to='/'>Home</Link>
-				</h3>
-				<h3 className='justify-item-end pr-4 mx-5'>
+				</h2>
+				<h2 className='nav-links__link'>
 					<Link to='/about'>About</Link>
-				</h3> */}
-			</div>
-		</nav>
+				</h2>
+			</nav>
+		</header>
 	);
 };
 

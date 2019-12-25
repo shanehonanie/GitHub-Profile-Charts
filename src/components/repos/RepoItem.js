@@ -17,40 +17,35 @@ const RepoItem = ({ repo }) => {
 	};
 
 	return (
-		<div className='card col-lg-3 m-3'>
-			<div className='card-body d-flex flex-column'>
-				<div className='row align-self-center'>
-					<h5>
-						<i className='octicon octicon-repo'></i>
-						<a className='text-break' href={repo.html_url}>
-							{repo.name}
-						</a>
-					</h5>
-				</div>
+		<div className='card card-repo-item'>
+			<h3 className='card-repo-item__name'>
+				<i className='octicon octicon-repo'></i>
+				<a
+					className=''
+					href={repo.html_url}
+					target='_blank'
+					rel='noopener noreferrer'
+				>
+					{repo.name}
+				</a>
+			</h3>
 
-				<div className='row text-center'>
-					<p className=''>{repo.description}</p>
-				</div>
+			<p className='card-repo-item__description'>{repo.description}</p>
 
-				<div className='row align-self-center mt-auto'>
-					<small className='mr-2 octicon octicon-code'>{lang}</small>
-					<small className='mx-2 octicon octicon-repo-forked'>
-						{repo.forks}
-					</small>
-					<small className='mx-2 octicon octicon-star'>
-						{repo.stargazers_count}
-					</small>
-					<small className='ml-2'>{repo.size} KB</small>
-				</div>
-
-				<div className=' align-self-center'>
-					<small className=''>Created: {toReadibleDate(repo.created_at)}</small>
-				</div>
-
-				<div className=' align-self-center'>
-					<small className=''>Updated: {toReadibleDate(repo.updated_at)}</small>
-				</div>
+			<div className='card-repo-item__stats-group'>
+				<small className='octicon octicon-code'>{lang}</small>
+				<small className='octicon octicon-repo-forked'>{repo.forks}</small>
+				<small className='octicon octicon-star'>{repo.stargazers_count}</small>
+				<small className=''>{repo.size} KB</small>
 			</div>
+
+			<small className='card-repo-item__created'>
+				Created: {toReadibleDate(repo.created_at)}
+			</small>
+
+			<small className='card-repo-item__updated'>
+				Updated: {toReadibleDate(repo.updated_at)}
+			</small>
 		</div>
 	);
 };
