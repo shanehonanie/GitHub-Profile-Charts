@@ -70,7 +70,7 @@ const GithubState = props => {
 		// );
 
 		const res = await axios.get(
-			`https://api.github.com/users/${username}/repos?per_page=20&sort=updated&client_id=${githubClientId}&client_secret=${githubClientSecret}`
+			`https://api.github.com/users/${username}/repos?per_page=21&sort=updated&client_id=${githubClientId}&client_secret=${githubClientSecret}`
 		);
 
 		dispatch({
