@@ -220,6 +220,21 @@ html {
 	flex-wrap: wrap;
 }
 
+// About
+.about-section {
+	font-size: 2.5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 5rem;
+	line-height: 5rem;
+
+	a {
+		color: var(--color-blue-1);
+		text-decoration: none;
+	}
+}
+
 // components
 .btn-dark {
 	display: inline-block;
