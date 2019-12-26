@@ -123,9 +123,11 @@ const User = ({ match }) => {
 	return (
 		<Fragment>
 			<div className='container'>
-				<Link to='/' className='btn-success btn-back-search'>
-					Back To Search
-				</Link>
+				<div className='btn-back-search'>
+					<Link to='/' className='btn-success btn-sm-back'>
+						Back To Search
+					</Link>
+				</div>
 
 				{/* Top Card */}
 				<div className='card'>

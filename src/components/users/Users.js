@@ -1,4 +1,4 @@
-import React, { useContext, Fragment } from 'react';
+import React, { useContext } from 'react';
 import UserItem from './UserItem';
 import Spinner from '../layout/Spinner';
 import GithubContext from '../../context/github/GithubContext';

@@ -10,6 +10,12 @@
 	--success-color: #28a745;
 }
 
+$bp-largest: 68.75em; // 960px/16
+$bp-large: 60em; // 960px/16
+$bp-medium: 48.125em; // 770px/16
+$bp-small: 34.375em; // 550px/16
+$bp-smallest: 24.375em; // 550px/16
+
 * {
 	margin: 0;
 	padding: 0;
@@ -25,6 +31,11 @@ html {
 	font-family: 'Roboto', sans-serif;
 	box-sizing: border-box;
 	font-size: 62.5%; // 1 rem = 10px, 10px/16px = 62.5%
+
+	@media only screen and (max-width: $bp-large) {
+		// 8px
+		font-size: 50%;
+	}
 }
 
 // Header / Nav
@@ -38,6 +49,14 @@ html {
 		color: #fff;
 		font-size: 3rem;
 		margin: 0.8rem 2rem;
+
+		@media only screen and (max-width: $bp-small) {
+			font-size: 2rem;
+		}
+
+		@media only screen and (max-width: $bp-smallest) {
+			font-size: 1.4rem;
+		}
 	}
 
 	.nav-links {
@@ -58,6 +77,7 @@ html {
 // layout
 .container {
 	max-width: 120rem;
+	overflow: hidden;
 	margin: 8rem auto;
 	// background-color: orangered;
 	min-height: 50rem;
@@ -69,6 +89,21 @@ html {
 		width: 92%;
 		height: 3.5rem;
 		margin: 0.5rem 4.6rem;
+
+		@media only screen and (max-width: $bp-medium) {
+			width: 90%;
+			margin: 0.5rem 4rem;
+		}
+
+		@media only screen and (max-width: $bp-small) {
+			width: 95%;
+			margin: 0.5rem 2rem;
+		}
+
+		@media only screen and (max-width: $bp-smallest) {
+			width: 100%;
+			margin: 0.5rem 0;
+		}
 	}
 
 	&__button-search {
@@ -76,6 +111,21 @@ html {
 		width: 92%;
 		height: 3.5rem;
 		margin: 0.5rem 4.6rem;
+
+		@media only screen and (max-width: $bp-medium) {
+			width: 90%;
+			margin: 0.5rem 4rem;
+		}
+
+		@media only screen and (max-width: $bp-small) {
+			width: 95%;
+			margin: 0.5rem 2rem;
+		}
+
+		@media only screen and (max-width: $bp-smallest) {
+			width: 100%;
+			margin: 0.5rem 0;
+		}
 	}
 
 	&__button-clear {
@@ -83,6 +133,21 @@ html {
 		width: 92%;
 		height: 3.5rem;
 		margin: 0.5rem 4.6rem;
+
+		@media only screen and (max-width: $bp-medium) {
+			width: 90%;
+			margin: 0.5rem 4rem;
+		}
+
+		@media only screen and (max-width: $bp-small) {
+			width: 95%;
+			margin: 0.5rem 2rem;
+		}
+
+		@media only screen and (max-width: $bp-smallest) {
+			width: 100%;
+			margin: 0.5rem 0;
+		}
 	}
 }
 
@@ -92,13 +157,42 @@ html {
 	flex-wrap: wrap;
 	margin: 1rem;
 	margin-left: 3rem;
+
+	@media only screen and (max-width: $bp-small) {
+		margin-left: 2rem;
+	}
+
+	// @media only screen and (max-width: $bp-small) {
+	// 	width: 95%;
+	// 	margin: 0.5rem 2rem;
+	// }
 }
 
 // Single User Page
 // Back Button
 .btn-back-search {
+	display: flex;
+	margin-left: 1rem;
 	margin-bottom: 1rem;
-	background-color: var(--success-color);
+	justify-content: flex-start;
+	// background-color: var(--success-color);
+
+	@media only screen and (max-width: $bp-small) {
+		justify-content: center;
+	}
+}
+
+.btn-sm-back {
+	text-align: center;
+	width: auto;
+
+	@media only screen and (max-width: $bp-small) {
+		width: 70%;
+	}
+
+	@media only screen and (max-width: $bp-smallest) {
+		width: 90%;
+	}
 }
 
 // Top Card
@@ -106,11 +200,20 @@ html {
 	display: flex;
 	width: 100%;
 
+	@media only screen and (max-width: $bp-small) {
+		flex-direction: column;
+		align-items: center;
+	}
+
 	&__left {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		width: 50%;
+
+		@media only screen and (max-width: $bp-small) {
+			width: 90%;
+		}
 
 		> img {
 			height: 15rem;
@@ -121,6 +224,10 @@ html {
 		> h1 {
 			font-size: 4rem;
 			margin-bottom: 1.5rem;
+
+			@media only screen and (max-width: $bp-small) {
+				font-size: 2.5rem;
+			}
 		}
 
 		> p {
@@ -135,9 +242,20 @@ html {
 		justify-content: center;
 		width: 50%;
 
+		@media only screen and (max-width: $bp-small) {
+			width: 90%;
+			align-items: center;
+		}
+
 		> h2 {
 			font-size: 3rem;
 			margin: 2rem 0;
+
+			@media only screen and (max-width: $bp-small) {
+				font-size: 2.2rem;
+				margin-top: 3rem;
+				align-self: center;
+			}
 		}
 
 		> p {
@@ -149,6 +267,14 @@ html {
 			width: 35%;
 			text-align: center;
 			margin-bottom: 2rem;
+
+			@media only screen and (max-width: $bp-medium) {
+				width: 50%;
+			}
+
+			@media only screen and (max-width: $bp-small) {
+				width: 60%;
+			}
 		}
 	}
 }
@@ -197,13 +323,33 @@ html {
 	align-items: center;
 	width: 100%;
 	font-size: 2rem;
+	padding: 0 1rem;
 	margin-top: 3rem;
+
+	@media only screen and (max-width: $bp-small) {
+		padding-left: 3rem;
+	}
 
 	&__sort-group {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		width: 17%;
+		width: auto;
+		flex-wrap: nowrap;
+
+		&__label {
+			padding-right: 1rem;
+
+			@media only screen and (max-width: $bp-small) {
+				padding-right: 0;
+				margin-bottom: 0.8rem;
+			}
+		}
+
+		@media only screen and (max-width: $bp-small) {
+			flex-direction: column;
+			width: 50%;
+		}
 
 		&__select {
 			font-size: 2rem;
@@ -228,6 +374,16 @@ html {
 	align-items: center;
 	margin-top: 5rem;
 	line-height: 5rem;
+
+	@media only screen and (max-width: $bp-small) {
+		font-size: 2rem;
+		line-height: 3.5rem;
+	}
+
+	@media only screen and (max-width: $bp-smallest) {
+		font-size: 1.5rem;
+		line-height: 2.5rem;
+	}
 
 	a {
 		color: var(--color-blue-1);
@@ -279,6 +435,14 @@ html {
 	margin: 1.5rem;
 	padding: 2rem;
 
+	@media only screen and (max-width: $bp-medium) {
+		width: 45%;
+	}
+
+	@media only screen and (max-width: $bp-small) {
+		width: 95%;
+	}
+
 	&__img {
 		height: 8rem;
 		border-radius: 50%;
@@ -298,6 +462,16 @@ html {
 	margin: 1.5rem;
 	padding: 1rem;
 	font-size: 1.5rem;
+
+	@media only screen and (max-width: $bp-medium) {
+		width: 45%;
+		margin: 1rem;
+	}
+
+	@media only screen and (max-width: $bp-small) {
+		width: 95%;
+		margin: 1rem;
+	}
 
 	a {
 		color: var(--color-blue-1);
